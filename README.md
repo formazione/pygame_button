@@ -16,4 +16,4 @@ Take a look at nice_button.py it make a very nice button for pygame.
 Updated 20.5.2021
 See ya soon for new updates
 
-![my blog page](https://pythonprogramming.altervista.org/buttons-in-pygame/)
+[my blog page](https://pythonprogramming.altervista.org/buttons-in-pygame/)
