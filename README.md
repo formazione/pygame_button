@@ -11,7 +11,7 @@ Take a look at nice_button.py it make a very nice button for pygame.
 
 ## Second type
 
-![second butto](https://i2.wp.com/pythonprogramming.altervista.org/wp-content/uploads/2021/05/image-7.png?w=601&ssl=1)
+![second button](https://i2.wp.com/pythonprogramming.altervista.org/wp-content/uploads/2021/05/image-7.png?w=601&ssl=1)
 
 Updated 20.5.2021
 See ya soon for new updates
