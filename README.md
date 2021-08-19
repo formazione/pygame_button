@@ -13,7 +13,7 @@ Take a look at nice_button.py it make a very nice button for pygame.
 
 ![second button](https://i2.wp.com/pythonprogramming.altervista.org/wp-content/uploads/2021/05/image-7.png?w=601&ssl=1)
 
-Updated 20.5.2021
-See ya soon for new updates
+Updated 20.8.2021 - Some colors at last
+![third button](https://i1.wp.com/pythonprogramming.altervista.org/wp-content/uploads/2021/08/image-28.png?w=1126&ssl=1)
 
 [my blog page](https://pythonprogramming.altervista.org/buttons-in-pygame/)
