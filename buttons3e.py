@@ -19,8 +19,11 @@ class Button(pygame.sprite.Sprite):
         # --- colors ---
         self.colors = colors
         self.original_colors = colors
-        self.hover_colors = hover_colors
         self.fg, self.bg = self.colors.split(" on ")
+        if hover_colors == "red on green":
+            self.hover_colors = f"{self.bg} on {self.fg}"
+        else:
+            self.hover_colors = hover_colors
         self.style = style
         self.borderc = borderc # for the style2
         # font
@@ -105,7 +108,6 @@ def loop():
 b0 = Button((10, 10), "Click", 55, "black on white")
 b1 = Button((10, 100), "Run", 40, "black on red")
 b2 = Button((10, 170), "Save", 36, "red on yellow",
-    hover_colors="white on red", style=2, borderc=(255,255,0))
-print(b0.x)
+    hover_colors="red on orange", style=2, borderc=(255,255,0))
 
 loop()
