@@ -7,10 +7,11 @@ class Button(pygame.sprite.Sprite):
     def __init__(self, position, text, size,
         colors="white on blue",
         hover_colors="red on green",
-        style=1, borderc=(255,255,255)):
+        style=1, borderc=(255,255,255), command=None):
         # the hover_colors attribute needs to be fixed
         super().__init__()
         self.text = text
+        self.command = command
         # --- colors ---
         self.colors = colors
         self.original_colors = colors
@@ -83,3 +84,12 @@ class Button(pygame.sprite.Sprite):
                 self.pressed = 0
             if pygame.mouse.get_pressed() == (0,0,0):
                 self.pressed = 1
+
+    def command(self):
+        return self.command()
+
+
+# FUNCTIONS
+
+def print_hello():
+    print("Ciao")

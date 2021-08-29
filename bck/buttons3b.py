@@ -1,5 +1,6 @@
-
 import pygame
+import sys
+
 
 pygame.init()
 screen = pygame.display.set_mode((600, 400))
@@ -62,27 +63,34 @@ def mouseover(obj):
         obj.colors = "red on green"
     else:
         not_hover(obj)
+game_on = 0
+
 
 def menu():
     """ This is the menu that waits you to click the s key to start """
-
+    game_on = 1
 
     while True:
         for event in pygame.event.get():
             if (event.type == pygame.QUIT):
+                game_on = 0
                 pygame.quit()
 
 
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
+                    game_on = 0
                     pygame.quit()
                 key_to_start = event.key == pygame.K_s or event.key == pygame.K_RIGHT or event.key == pygame.K_UP
                 if key_to_start:
                     start()
 
- 
-        buttons.update()
-        buttons.draw(screen)
+        if game_on:
+            buttons.update()
+            buttons.draw(screen)
+        else:
+            pygame.quit()
+            sys.exit()
         clock.tick(60)
         pygame.display.update()
     pygame.quit()
