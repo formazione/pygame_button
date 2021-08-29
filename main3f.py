@@ -1,17 +1,20 @@
 import pygame
 import pygame.gfxdraw
 from code.buttons2 import *
+import sys
 
-# pygame.init()
+
+pygame.init()
 
 
-def buttons_def():
-    b0 = Button((10, 10), "Click", 55, "black on white",
-        command=print_hello)
-    b1 = Button((10, 100), "Run", 40, "black on red")
+# def buttons_def():
+#     b0 = Button((10, 10), "Click", 55, "black on white",
+#         command=on_click)
+#     b1 = Button((10, 100), "Run", 40, "black on red", command=on_run)
 
-    b2 = Button((10, 170), "Save", 36, "red on yellow",
-        hover_colors="blue on orange", style=2, borderc=(255,255,0))
+#     b2 = Button((10, 170), "Save", 36, "red on yellow",
+#         hover_colors="blue on orange", style=2, borderc=(255,255,0),
+#         command=on_save)
 
 game_on = 0
 def loop():
