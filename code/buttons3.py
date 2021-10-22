@@ -1,4 +1,7 @@
 import pygame
+import pygame.gfxdraw
+
+
 
 pygame.init()
 screen = pygame.display.set_mode((600, 400))
@@ -9,13 +12,12 @@ class Button(pygame.sprite.Sprite):
         colors="white on blue",
         hover_colors="red on green",
         style=1, borderc=(255,255,255),
-        command=lambda: print('''Add the param 'command' 
-to this button istance binding it to the name of a fuction,
-i.e. command=show_image where show image is a normal function.
-You can use lambda too.''')):
+        command=lambda: print("No command activated for this button"),
+        image=""):
         # the hover_colors attribute needs to be fixed
         super().__init__()
         self.text = text
+        self.img = image
         self.command = command
         # --- colors ---
         self.colors = colors
@@ -39,7 +41,10 @@ You can use lambda too.''')):
 
     def render(self):
         self.text_render = self.font.render(self.text, 1, self.fg)
-        self.image = self.text_render
+        if self.img == "":
+            self.image = self.text_render
+        else:
+            self.image == pygame.image.load(self.img)
 
     def update(self):
         self.fg, self.bg = self.colors.split(" on ")
@@ -81,8 +86,8 @@ You can use lambda too.''')):
         ''' checks if you click on the button and makes the call to the action just one time'''
         if self.rect.collidepoint(pygame.mouse.get_pos()):
             if pygame.mouse.get_pressed()[0] and self.pressed == 1:
-                print("Execunting code for " + self.text)
-                # self.command()
+                print("Execunting code for button '" + self.text + "'")
+                self.command()
                 self.pressed = 0
             if pygame.mouse.get_pressed() == (0,0,0):
                 self.pressed = 1
@@ -90,32 +95,59 @@ You can use lambda too.''')):
 
 
 
-# FUNCTIONS
+# FUNCTIONS for the buttons on click
+# I used this convention ... on_+text of the button
 
-def print_hello():
-    print("Ciao")
+def on_click():
+    print("Ciao bello")
 
+def on_run():
+    print("Ciao bello questo è RUN")
+
+def on_save():
+    print("This is Save")
+
+def buttons_def():
+    b0 = Button((10, 10), "Click me now", 55, "black on white",
+        command=on_click)
+    b1 = Button((10, 100), "Run the program", 40, "black on red", command=on_run)
+
+    b2 = Button((10, 170), "Save this file", 36, "red on yellow",
+        hover_colors="blue on orange", style=2, borderc=(255,255,0),
+        command=on_save)
+
+# ======================= this code is just for example, start the program from the main file
+# in the main folder, I mean, you can also use this file only, but I prefer from the main file
+# 29.8.2021
 
 if __name__ == '__main__':
     pygame.init()
-    print("\nHey you run this but...\n...it is not the main file.")
-    print("\nPlease, stop looking at an empty window\nClose it and Run main3f.py")
-
+    game_on = 0
     def loop():
+        # BUTTONS ISTANCES
+        game_on = 1
+        buttons_def()
         while True:
             for event in pygame.event.get():
                 if (event.type == pygame.QUIT):
+                    game_on = 0
                     pygame.quit()
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_ESCAPE:
                         pygame.quit()
-
-            buttons.update()
+                        game_on = 0
+            if game_on:
+                buttons.update()
+                buttons.draw(screen)
+            else:
+                pygame.quit()
+                sys.exit()
             buttons.draw(screen)
             clock.tick(60)
             pygame.display.update()
         pygame.quit()
 
-    
+
+
 
     loop()

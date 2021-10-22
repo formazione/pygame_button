@@ -103,11 +103,11 @@ def on_save():
     print("This is Save")
 
 def buttons_def():
-    b0 = Button((10, 10), "Click", 55, "black on white",
+    b0 = Button((10, 10), "Click me now", 55, "black on white",
         command=on_click)
-    b1 = Button((10, 100), "Run", 40, "black on red", command=on_run)
+    b1 = Button((10, 100), "Run the program", 40, "black on red", command=on_run)
 
-    b2 = Button((10, 170), "Save", 36, "red on yellow",
+    b2 = Button((10, 170), "Save this file", 36, "red on yellow",
         hover_colors="blue on orange", style=2, borderc=(255,255,0),
         command=on_save)
 

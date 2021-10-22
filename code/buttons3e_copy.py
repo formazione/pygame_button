@@ -1,22 +1,21 @@
 import pygame
+import pygame.gfxdraw
+
 
 pygame.init()
 screen = pygame.display.set_mode((600, 400))
 clock = pygame.time.Clock()
+
 buttons = pygame.sprite.Group()
+
 class Button(pygame.sprite.Sprite):
     def __init__(self, position, text, size,
         colors="white on blue",
         hover_colors="red on green",
-        style=1, borderc=(255,255,255),
-        command=lambda: print('''Add the param 'command' 
-to this button istance binding it to the name of a fuction,
-i.e. command=show_image where show image is a normal function.
-You can use lambda too.''')):
+        style=1, borderc=(255,255,255)):
         # the hover_colors attribute needs to be fixed
         super().__init__()
         self.text = text
-        self.command = command
         # --- colors ---
         self.colors = colors
         self.original_colors = colors
@@ -81,41 +80,34 @@ You can use lambda too.''')):
         ''' checks if you click on the button and makes the call to the action just one time'''
         if self.rect.collidepoint(pygame.mouse.get_pos()):
             if pygame.mouse.get_pressed()[0] and self.pressed == 1:
-                print("Execunting code for " + self.text)
-                # self.command()
+                print(self.position)
+                print(self.colors)
+                print(self.hover_colors)
+                print(self.fg)
+                print(self.bg)
                 self.pressed = 0
             if pygame.mouse.get_pressed() == (0,0,0):
                 self.pressed = 1
 
 
-
-
-# FUNCTIONS
-
-def print_hello():
-    print("Ciao")
-
-
-if __name__ == '__main__':
-    pygame.init()
-    print("\nHey you run this but...\n...it is not the main file.")
-    print("\nPlease, stop looking at an empty window\nClose it and Run main3f.py")
-
-    def loop():
-        while True:
-            for event in pygame.event.get():
-                if (event.type == pygame.QUIT):
+def loop():
+    while True:
+        for event in pygame.event.get():
+            if (event.type == pygame.QUIT):
+                pygame.quit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
                     pygame.quit()
-                if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_ESCAPE:
-                        pygame.quit()
 
-            buttons.update()
-            buttons.draw(screen)
-            clock.tick(60)
-            pygame.display.update()
-        pygame.quit()
+        buttons.update()
+        buttons.draw(screen)
+        clock.tick(60)
+        pygame.display.update()
+    pygame.quit()
+# BUTTONS ISTANCES
+b0 = Button((10, 10), "Click", 55, "black on white")
+b1 = Button((10, 100), "Run", 40, "black on red")
+b2 = Button((10, 170), "Save", 36, "red on yellow",
+    hover_colors="red on orange", style=2, borderc=(255,255,0))
 
-    
-
-    loop()
+loop()
