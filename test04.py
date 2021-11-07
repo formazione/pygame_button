@@ -10,8 +10,7 @@ pygame.init()
 screen = pygame.display.set_mode((600, 400))
 clock = pygame.time.Clock()
 buttons = pygame.sprite.Group()
-
-
+num = 1
 class Button(pygame.sprite.Sprite):
     
     def __init__(self, position, text, size,
@@ -23,9 +22,11 @@ class Button(pygame.sprite.Sprite):
 
         # the hover_colors attribute needs to be fixed
         super().__init__()
+        global num
 
 
         self.text = text
+
         self.command = command
         # --- colors ---
         self.colors = colors
@@ -41,18 +42,18 @@ class Button(pygame.sprite.Sprite):
         self.borderc = borderc # for the style2
         # font
         self.font = pygame.font.SysFont("Arial", size)
-        self.render()
+        self.render(self.text)
         self.x, self.y, self.w , self.h = self.text_render.get_rect()
         self.x, self.y = position
-        self.rect = pygame.Rect(self.x, self.y, self.w, self.h)
+        self.rect = pygame.Rect(self.x, self.y, 500, self.h)
         self.position = position
         self.pressed = 1
         # the groups with all the buttons
         buttons.add(self)
 
-    def render(self):
+    def render(self, text):
         # we have a surface
-        self.text_render = self.font.render(self.text, 1, self.fg)
+        self.text_render = self.font.render(text, 1, self.fg)
         # memorize the surface in the image attributes
         self.image = self.text_render
 
@@ -79,8 +80,8 @@ class Button(pygame.sprite.Sprite):
 
     def draw_button2(self):
         ''' a linear border '''
-        pygame.draw.rect(screen, self.bg, (self.x, self.y, self.w , self.h))
-        pygame.gfxdraw.rectangle(screen, (self.x, self.y, self.w , self.h), self.borderc)
+        pygame.draw.rect(screen, self.bg, (self.x - 50, self.y, 500 , self.h))
+        pygame.gfxdraw.rectangle(screen, (self.x - 50, self.y, 500 , self.h), self.borderc)
 
     def check_collision(self):
         if self.rect.collidepoint(pygame.mouse.get_pos()):
@@ -90,6 +91,7 @@ class Button(pygame.sprite.Sprite):
         else:
             self.colors = self.original_colors
             # pygame.mouse.set_cursor(*pygame.cursors.arrow)
+
 
     def hover(self):
         ''' checks if the mouse is over the button and changes the color if it is true '''
@@ -144,59 +146,60 @@ def forward():
 
 
 questions = [
-    ["What is Italy's Capital?", ["Rome", "Paris", "London"]],
-    ["What is France's Capital?", ["Paris", "Rome", "Athen"]],
-    ["What is England's Capital?", ["London", "Rome", "Paris"]],
+    ["What is Italy's Capital?", ["Rome", "Paris", "Tokyo", "Madrid"]],
+    ["What is France's Capital?", ["Paris", "Rome", "Tokyo", "Madrid"]],
+    ["What is England's Capital?", ["London", "Rome", "Tokyo", "Madrid"]],
 ]
 
 
 def question(qnum):
     ''' put your buttons here '''
 
-    pos = []
     for sprites in buttons:
         sprites.kill()
 
-    match len(questions[qnum]):
-        case 3:
-            print(pos)
-            pos = [100, 150, 200]
-        case 2:
-            print(pos)
-            pos = [100, 150]
-
-
+    pos = [100, 150, 200, 250]
+    random.shuffle(pos)
     # this is a label, a button with no border does nothing: command = None
-    lbl_num = Button((0, 0), str(qnum-1), 20, "white on black",
-        hover_colors="blue on orange", style=2, borderc=(255,0,0),
-        command=None)
-
-    lbl_question = Button((10, 10), questions[qnum-1][0], 55, "white on black",
+    Button((0, 0), str(qnum-1), 20, "white on black",
         hover_colors="blue on orange", style=2, borderc=(0,0,0),
         command=None)
 
-    x1 = random.sample(pos, 1)
-    pos.pop(pos.index(x1[0]))
-    print(pos)
-    b1 = Button((10, x1[0]), questions[qnum-1][1][0], 36, "red on yellow",
+    Button((10, 10), questions[qnum-1][0], 55, "white on black",
+        hover_colors="blue on orange", style=2, borderc=(0,0,0),
+        command=None)
+
+    # ______------_____ BUTTONS FOR ANSWERS _____------______ #
+
+    Button((10, 100), "1. ", 36, "red on yellow",
+        hover_colors="blue on orange", style=2, borderc=(255,255,0),
+        command=None)
+    Button((10, 150), "2. ", 36, "red on yellow",
+        hover_colors="blue on orange", style=2, borderc=(255,255,0),
+        command=None)
+    Button((10, 200), "3. ", 36, "red on yellow",
+        hover_colors="blue on orange", style=2, borderc=(255,255,0),
+        command=None)
+    Button((10, 250), "4. ", 36, "red on yellow",
+        hover_colors="blue on orange", style=2, borderc=(255,255,0),
+        command=None)
+
+    Button((50, pos[0]), questions[qnum-1][1][0], 36, "red on yellow",
         hover_colors="blue on orange", style=2, borderc=(255,255,0),
         command=on_right)
 
-    x1 = random.sample(pos, 1)
-    pos.pop(pos.index(x1[0]))
-    print(pos)
-    b2 = Button((10, x1), questions[qnum-1][1][1], 36, "red on yellow",
+
+    Button((50, pos[1]), questions[qnum-1][1][1], 36, "red on yellow",
         hover_colors="blue on orange", style=2, borderc=(255,255,0),
         command=on_false)
 
-    if len(questions[qnum]) == 3:
-        x1 = random.sample(pos, 1)
-        pos.pop(pos.index(x1[0]))
-        print(pos)
-        b2 = Button((10, x1), questions[qnum-1][1][1], 36, "red on yellow",
-            hover_colors="blue on orange", style=2, borderc=(255,255,0),
-            command=on_false)
+    Button((50, pos[2]), questions[qnum-1][1][2], 36, "red on yellow",
+        hover_colors="blue on orange", style=2, borderc=(255,255,0),
+        command=on_false)
 
+    Button((50, pos[3]), questions[qnum-1][1][3], 36, "red on yellow",
+        hover_colors="blue on orange", style=2, borderc=(255,255,0),
+        command=on_false)
 
 # ======================= this code is just for example, start the program from the main file
 # in the main folder, I mean, you can also use this file only, but I prefer from the main file
