@@ -1,0 +1,29 @@
+To make a button we got different choices:
+
+1) buttons are istance made in the class Window.
+
+--- You can add a command as last parameter with command=self.method ------------------------
+button1 = Button('Rome',200,40,(100,200),5, command=self.button1_command)
+
+the function (put the code before the istance in the function buttons_istances) is, for example this:
+
+def button1_command(self):
+	print("The first button has some code")
+	self.button1.text = "Pressed"
+
+--- whit a lambda function in the istance --------------------------------------
+button2 = Button('Milan',200,40,(100,250),5, lambda: print("This was done with istance"))
+
+--- after the istance ---------------------------------------------
+button2.command = (lambda: print("I am Milan button"))
+
+--- with the bind function ----------------------------------------
+button3 = Button('Neaples',200,40,(100,300),5)
+button3.bind(lambda: print("Hello"))
+
+
+IF YOU GOT AN ERROR: "MUST HAVE A WRONG FUNCTION..."
+- Check if you defined the method like in the example above
+or if you mispelled the name of the function.
+- Did you put self. before the name of the command function?
+

@@ -97,8 +97,8 @@ class Window():
 
 	def button1_command(self):
 		''' code executed on click of button1 '''
-		print("The first button has some code")
-		self.button1.text = "Pressed"
+		print("Let the game begin")
+		self.button1.text = "Loading assets..."
 
 
 	def button_help_command(self):
@@ -110,11 +110,11 @@ class Window():
 
 	def buttons_istances(self):
 		''' code executed when you click "?" button on top left corner'''
-		self.button1 = Button('Rome',200,40,(100,200),5, self.button1_command)
-		self.button2 = Button('Milan',200,40,(100,250),5)
-		self.button2.command = (lambda: print("I am Milan button"))
-		self.button3 = Button('Neaples',200,40,(100,300),5)
-		self.button3.bind(lambda: print("Hello"))
+		self.button1 = Button('Start the Game',200,40,(100,200),5, self.button1_command)
+		self.button2 = Button('Options',200,40,(100,250),5)
+		self.button2.command = (lambda: print("What difficulty you want to choose?"))
+		self.button3 = Button('Quit the game',200,40,(100,300),5)
+		self.button3.bind(lambda: print("Ok, bye"))
 		self.button_help = Button('?',40,40,(0,0),5, command=self.button_help_command)
 
 try:

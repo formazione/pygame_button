@@ -17,7 +17,7 @@ class Button(pygame.sprite.Sprite):
                 hover_colors="red on green",
                 style=1, borderc=(255,255,255),
                 command=lambda: print("No command activated for this button")):
-    
+
         # the hover_colors attribute needs to be fixed
         super().__init__()
         self.text = text
@@ -35,7 +35,7 @@ class Button(pygame.sprite.Sprite):
         # font
         self.font = pygame.font.SysFont("Arial", size)
         self.render()
-        self.x, self.y, self.w , self.h = self.text_render.get_rect()
+        self.x, self.y, self.w , self.h = self.image.get_rect()
         self.x, self.y = position
         self.rect = pygame.Rect(self.x, self.y, self.w, self.h)
         self.position = position
@@ -43,8 +43,8 @@ class Button(pygame.sprite.Sprite):
         buttons.add(self)
 
     def render(self):
-        self.text_render = self.font.render(self.text, 1, self.fg)
-        self.image = self.text_render
+        self.image = self.font.render(self.text, 1, self.fg)
+
 
     def update(self):
         self.fg, self.bg = self.colors.split(" on ")
@@ -143,11 +143,15 @@ def buttons_def():
         (10, 250),
         "Colorpycker",
         36,
-        "#417130 on red",
+        "#ccda00 on red",
         hover_colors="yellow on black",
         style=2,
         borderc=(255,255,0),
         command=b3_click)
+
+
+# KILL ALL THE PROCESSES IN PYTHON RUNNING:
+#            taskkill /im python.exe /F
 
 # ======================= this code is just for example, start the program from the main file
 # in the main folder, I mean, you can also use this file only, but I prefer from the main file
