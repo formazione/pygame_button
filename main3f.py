@@ -1,6 +1,6 @@
 import pygame
 import pygame.gfxdraw
-from code.buttons2 import *
+from code.buttons2_beta import *
 import sys
 
 

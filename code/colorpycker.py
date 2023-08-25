@@ -14,7 +14,7 @@ class Window:
 		self.root.mainloop()
 
 	def widgets(self):
-		self.label_widget()
+		self.entry_widget()
 		self.color1 = 0
 		self.color2 = 0
 		self.color3 = 0
@@ -23,12 +23,14 @@ class Window:
 		self.scale_widget3()
 
 
-	def label_widget(self):
-		self.label = tk.Label(self.root,
-			text="...",
+	def entry_widget(self):
+		self.ev = tk.StringVar()
+		self.entry = tk.Entry(
+			self.root,
+			text=self.ev,
 			font="Arial 20",
 			)
-		self.label.pack(pady=80)
+		self.entry.pack(pady=80)
 
 	def scale_widget1(self):
 		self.var1 = tk.IntVar()
@@ -68,24 +70,27 @@ class Window:
 	def refresh_color(self):
 		self.rgb_to_hex(self.color1,self.color2,self.color3)
 		self.root.title(f"{self.color1},{self.color2},{self.color3}")
-		self.label.config(text=(self.hex))
+		print(self.hex)
+		self.ev = self.hex
+		self.entry.pack(pady=80)
+		print(f"{self.ev=}")
 		self.root.config(background=self.hex)
 
 
 	def scalecommand1(self, scale_size):
-		''' modify text in label = scale size '''
+		''' modify text in entry = scale size '''
 		self.color1 = int(scale_size)
 		self.refresh_color()
 
 
 	def scalecommand2(self, scale_size):
-		''' modify text in label = scale size '''
+		''' modify text in entry = scale size '''
 		self.color2 = int(scale_size)
 		self.refresh_color()
 
 
 	def scalecommand3(self, scale_size):
-		''' modify text in label = scale size '''
+		''' modify text in entry = scale size '''
 		self.color3 = int(scale_size)
 		self.refresh_color()
 

@@ -113,7 +113,10 @@ def b2_click():
     print("This is Save")
 
 def b3_click():
-    os.system("py colorpycker.py")
+    if __name__ == "__main__":
+        os.system("py colorpycker.py")
+    else:
+        os.system("py code\\colorpycker.py")
 
 def buttons_def():
     b0 = Button(
@@ -133,8 +136,8 @@ def buttons_def():
         (10, 170),
         "Save this file",
         36,
-        "#417130 on yellow",
-        hover_colors="gray on darkgrey",
+        "yellow on #417130",
+        hover_colors="#417130 on red",
         style=2,
         borderc=(255,255,0),
         command=b2_click)
