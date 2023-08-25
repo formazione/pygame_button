@@ -164,7 +164,6 @@ if __name__ == '__main__':
     pygame.init()
     def loop():
         # BUTTONS ISTANCES
-        game_on = 1
         buttons_def() # it creates the istances of the Button
         while True:
             for event in pygame.event.get():
