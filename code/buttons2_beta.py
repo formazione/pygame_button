@@ -162,19 +162,32 @@ def buttons_def():
 
 if __name__ == '__main__':
     pygame.init()
+    game_on = 0
     def loop():
         # BUTTONS ISTANCES
+        game_on = 1
         buttons_def() # it creates the istances of the Button
         while True:
             for event in pygame.event.get():
                 if (event.type == pygame.QUIT):
+                    game_on = 0
                     pygame.quit()
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_ESCAPE:
                         pygame.quit()
-            buttons.update()
+                        game_on = 0
+            if game_on:
+                buttons.update()
+                buttons.draw(screen)
+            else:
+                pygame.quit()
+                sys.exit()
             buttons.draw(screen)
             clock.tick(60)
             pygame.display.update()
         pygame.quit()
+
+
+
+
     loop()
