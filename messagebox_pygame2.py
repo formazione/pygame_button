@@ -2,30 +2,14 @@
 # GiovanniPython on YT
 # @pythonprogrammi on X
 
-
-import tkinter as tk
+import sys
 from tkinter import messagebox
 import pygame
 
 
-class Window:
-	def __init__(self):
-		root = tk.Tk()
-		root.title("MAIN WINDOW")
-		root.geometry("400x400+300+300")
-		hello = tk.Toplevel(root)
-		hello.title("Top")
-		hello.geometry("200x100+100+100")
-		hello.but1 = tk.Button(hello,
-			text="Toplevel",
-			command= lambda : messagebox.showinfo("Hello and attention",
-				"You clicked the button in tkinter toplevel - secondary - window")
-			)
-		hello.but1.pack()
-
-		root.mainloop()
-
-pygame.init()
+def message():
+	messagebox.showinfo("Message",
+				"from tkinter import messagebox\nmessagebox.showinfo('message','this is a message')")
 
 
 class Button:
@@ -52,11 +36,11 @@ class Button:
 		pygame.draw.rect(screen, (255, 255,255), self.rect)
 		screen.blit(self.text, (self.x, self.y))
 
-
+pygame.init()
 screen = pygame.display.set_mode((800,600))
 clock = pygame.time.Clock()
 
-button = Button("Open tkinter GUI", (100,100), command=Window)
+button = Button("Open tkinter GUI", (100,100), command=message)
 while True:
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT:
